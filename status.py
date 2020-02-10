@@ -18,7 +18,7 @@ def get_group_id_by_name(name):
         r = get_from_gitlab('/api/v4/groups?page=' + str(page) + '&per_page=50&all=False')
         if r == "":
             return -1
-        print(json.dumps(r))
+        # print(json.dumps(r))
         for resp in r:
             if resp['name'] == name:
                 return resp['id']
@@ -59,7 +59,6 @@ def get_pipelines_status_by_group(project_groups):
     r = []
     for projects_group in projects_groups:
         id = projects_group['id']
-        name = projects_group['name']
         projects = get_projects_by_group(id)
         projects = get_pipelines(projects)
         r.append({'name' : projects_group['name'], 'id': projects_group['id'], 'projects': projects})
